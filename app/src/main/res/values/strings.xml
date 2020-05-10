@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">BubbleTracker</string>
     <string name="appTitle">Bubble Tracker</string>
+    <string name="scanner">Scanner</string>
+    <string name="pCard">Personal Card</string>
+    <string name="bCard">Business Card</string>
+    <string name="manualEntry">Manual Entry</string>
+    <string name="editPersonal">Edit Personal Info</string>
+    <string name="editBusiness">Edit Business Info</string>
+    <string name="edit_info">Edit Info</string>
+    <string name="generate">Generate</string>
+    <string name="address_text">Address</string>
+    <string name="emailText">Email</string>
+    <string name="last_name_text">Last Name</string>
+    <string name="first_name_text">First Name</string>
 </resources>
