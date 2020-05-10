@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BubbleTracker</string>
+    <string name="appTitle">Bubble Tracker</string>
 </resources>
