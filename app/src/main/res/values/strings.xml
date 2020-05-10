@@ -13,4 +13,7 @@
     <string name="emailText">Email</string>
     <string name="last_name_text">Last Name</string>
     <string name="first_name_text">First Name</string>
+    <string name="scanner_label">Scanner</string>
+    <string name="business_card_label">Business Card</string>
+    <string name="personal_card_label">Personal Card</string>
 </resources>
