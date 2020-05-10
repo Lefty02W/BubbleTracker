@@ -15,5 +15,14 @@ class BusinessCardActivity: Activity(){
             val openEditBusinessCardInfoActivity = Intent(this, EditBusinessCardInfoActivity::class.java)
             startActivity(openEditBusinessCardInfoActivity)
         }
+
+        val btnGenerateBusinessQR: Button = findViewById(R.id.bCardGenerateBtn)
+        btnGenerateBusinessQR.setOnClickListener {
+            generateBusinessQR()
+        }
+    }
+
+    private fun generateBusinessQR() {
+
     }
 }

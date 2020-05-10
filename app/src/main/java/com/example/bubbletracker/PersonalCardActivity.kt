@@ -15,5 +15,14 @@ class PersonalCardActivity: Activity() {
             val openEditPersonalCardInfoActivity = Intent(this, EditPersonalCardInfoActivity::class.java)
             startActivity(openEditPersonalCardInfoActivity)
         }
+
+        val btnGeneratePersonalQR: Button = findViewById(R.id.pCardGenerateBtn)
+        btnGeneratePersonalQR.setOnClickListener {
+            generatePersonalQR()
+        }
+    }
+
+    private fun generatePersonalQR(){
+
     }
 }
