@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 
 class BusinessCardActivity: Activity(){
+
+    val text = "this is my business text"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_business_card)

@@ -49,7 +49,7 @@
         />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/personalQR"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rudimentHeading"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        android:contentDescription="@string/qr_description" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,4 +16,5 @@
     <string name="scanner_label">Scanner</string>
     <string name="business_card_label">Business Card</string>
     <string name="personal_card_label">Personal Card</string>
+    <string name="qr_description">Image view to hold QR code</string>
 </resources>
