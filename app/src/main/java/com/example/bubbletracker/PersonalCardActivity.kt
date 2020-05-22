@@ -14,14 +14,12 @@ import java.lang.IllegalArgumentException
 
 class PersonalCardActivity: Activity() {
 
-    private lateinit var context: Context
     val text = "This is my personal code"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_card)
-        context = this
         val btnOpenEditPersonalCardInfoActivity: Button = findViewById(R.id.pCardEditBtn)
         btnOpenEditPersonalCardInfoActivity.setOnClickListener {
             val openEditPersonalCardInfoActivity = Intent(this, EditPersonalCardInfoActivity::class.java)
@@ -34,15 +32,15 @@ class PersonalCardActivity: Activity() {
         }
     }
 
-    private fun generatePersonalQR(){
-        val bitmap = encodeAsBitmap(text, 300, 300, context)
+    private fun generatePersonalQR() {
+        val bitmap = encodeAsBitmap(text)
         personalQR.setImageBitmap(bitmap)
     }
 
-    private fun encodeAsBitmap(text: String, width: Int, height: Int, context: Context): Bitmap?{
+    private fun encodeAsBitmap(text: String): Bitmap?{
         val result: BitMatrix
         try{
-            result = MultiFormatWriter().encode(text,BarcodeFormat.QR_CODE, width, height, null)
+            result = MultiFormatWriter().encode(text,BarcodeFormat.QR_CODE, 300, 300, null)
         } catch (e: IllegalArgumentException){
             return null
         }
@@ -52,10 +50,8 @@ class PersonalCardActivity: Activity() {
         for (y in 0 until resultHeight){
             val offset = y * resultWidth
             for (x in 0 until resultWidth){
-                //Todo remove this comment
                 //If true then dark pixel if false then
-                pixels[offset + x] = if (result.get(x,y)) - 0x11110100 else -0x1
-
+                pixels[offset + x] = if (result.get(x,y)) - 0x1000000 else -0x1
             }
         }
         val bitmap = Bitmap.createBitmap(resultWidth,resultHeight, Bitmap.Config.ARGB_8888)
