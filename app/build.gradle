@@ -34,7 +34,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'me.dm7.barcodescanner:zbar:1.9.13'
+//    implementation 'me.dm7.barcodescanner:zbar:1.9.13'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation 'com.google.zxing:core:3.4.0'
 
 }
