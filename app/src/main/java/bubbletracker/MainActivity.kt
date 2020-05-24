@@ -1,10 +1,11 @@
-package com.example.bubbletracker
+package bubbletracker
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import com.example.bubbletracker.R
 import com.google.zxing.integration.android.IntentIntegrator
 
 class MainActivity : Activity(){

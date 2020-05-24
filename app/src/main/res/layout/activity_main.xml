@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#111422"
     android:clearTaskOnLaunch="true"
-    tools:context=".MainActivity">
+    tools:context="bubbletracker.MainActivity">
 
     <TextView
         android:id="@+id/mainHeading"

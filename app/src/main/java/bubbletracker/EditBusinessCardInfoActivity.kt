@@ -1,7 +1,8 @@
-package com.example.bubbletracker
+package bubbletracker
 
 import android.app.Activity
 import android.os.Bundle
+import com.example.bubbletracker.R
 
 class EditBusinessCardInfoActivity: Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {

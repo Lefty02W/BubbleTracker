@@ -1,9 +1,10 @@
-package com.example.bubbletracker
+package bubbletracker
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.example.bubbletracker.R
 import com.google.zxing.integration.android.IntentIntegrator
 
 //import me.dm7.barcodescanner.zbar.Result
@@ -26,7 +27,7 @@ class ScannerActivity: Activity(){
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
             if (result != null) {
                 if (result.contents == null) {
