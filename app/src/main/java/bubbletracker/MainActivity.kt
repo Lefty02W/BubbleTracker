@@ -1,7 +1,12 @@
 package bubbletracker
 
 import android.app.Activity
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -16,7 +21,7 @@ class MainActivity : Activity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        createNotificationChannel()
         runAnimation()
 
         val btnOpenPersonalCardActivity: Button = findViewById(R.id.personalCardBtn)
@@ -41,6 +46,24 @@ class MainActivity : Activity(){
         }
     }
 
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.channel_name)
+            val channelId = getString(R.string.channel_id)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(channelId, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
             val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
@@ -48,7 +71,20 @@ class MainActivity : Activity(){
                 if (result.contents == null) {
                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                        val notification = Notification.Builder(this, Notification.CATEGORY_REMINDER).run {
+                            setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+                            setContentTitle("A new day, a new memory")
+                            setContentText("Just a friendly reminder to take today's picture.")
+                            setAutoCancel(true)
+                            build()
+                        }
+
+                        val manager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                        manager.notify(0, notification)
+                    }
                     Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, data)
