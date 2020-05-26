@@ -11,7 +11,7 @@ class LoadDatabaseTask(mainActivity: MainActivity, var context: Context) : Async
     override fun doInBackground(vararg params: Unit?): ConnectionDatabase? {
         var database: ConnectionDatabase? = null
         mainActivity.get()?.let{
-            database = Room.databaseBuilder(context.applicationContext, ConnectionDatabase::class.java, "connections").build()
+            database = Room.databaseBuilder(context, ConnectionDatabase::class.java, "random").build()
         }
         return database
     }
@@ -27,12 +27,24 @@ class LoadDatabaseTask(mainActivity: MainActivity, var context: Context) : Async
 class LoadConnectionsTask(private val database: ConnectionDatabase,
                     private val mainActivity: MainActivity) : AsyncTask<Unit, Unit, List<Connection>>() {
     override fun doInBackground(vararg p0: Unit?): List<Connection> {
-        val songDao = database.connectionDao()
-        return songDao.getAll()
+        val connectionDao : ConnectionDao = database.connectionDao()
+        return connectionDao.getAll()
     }
 
     override fun onPostExecute(connections: List<Connection>) {
         mainActivity.connections = connections.toMutableList()
+    }
+}
+
+class LoadUserTask(private val database: ConnectionDatabase,
+                   private val mainActivity: MainActivity): AsyncTask<Unit, Unit, UserData>(){
+    override fun doInBackground(vararg params: Unit?): UserData {
+        val connectionDao : ConnectionDao = database.connectionDao()
+        return connectionDao.getUserData()
+    }
+
+    override fun onPostExecute(result: UserData?) {
+        mainActivity.userData = result
     }
 }
 
@@ -41,6 +53,13 @@ class NewConnectionTask(private val database: ConnectionDatabase,
     override fun doInBackground(vararg p0: Unit?) {
         //todo check this is correct
         connection.email = database.connectionDao().insert(connection).toString()
+    }
+}
+
+class UpdateUserTask(private  val database: ConnectionDatabase,
+                     private val userData: UserData) : AsyncTask<Unit, Unit, Unit>() {
+    override fun doInBackground(vararg params: Unit?) {
+        database.connectionDao().upsert(userData)
     }
 }
 

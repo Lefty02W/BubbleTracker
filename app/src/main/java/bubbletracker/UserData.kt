@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+const val CURRENT_USER_ID = 0
+
 @Entity(tableName = "user_data")
 class UserData (
     @ColumnInfo(name = "personal_email") var personalEmail: String,
@@ -14,5 +16,5 @@ class UserData (
 
     @ColumnInfo(name = "business_name") var businessName:String
 ){
-    @PrimaryKey(autoGenerate = true) var id: Long = 0
+    @PrimaryKey(autoGenerate = false) var id: Int = CURRENT_USER_ID
 }

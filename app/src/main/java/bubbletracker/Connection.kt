@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "connections")
 class Connection (
     @ColumnInfo(name = "direct_connections") var directConnections: Int,
-    var longitude: Double,
-    var latitude: Double
+    var longitude: String,
+    var latitude: String,
+    var email: String
 ) {
-    @PrimaryKey(autoGenerate = false)
-    lateinit var email: String
+    @PrimaryKey(autoGenerate = true) var id: Long = 0
 }

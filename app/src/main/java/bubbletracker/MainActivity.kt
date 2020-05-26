@@ -16,12 +16,17 @@ class MainActivity : Activity(){
             field = value
             value?.let {
                 LoadConnectionsTask(it, this).execute()
+                LoadUserTask(it, this).execute()
             }
         }
     init {
-        LoadDatabaseTask(this, this).execute()
+        //todo put this back into the method and only pass context in
+        //todo this is where the null pointer is
+        val context: Context = applicationContext
+        LoadDatabaseTask(this, context).execute()
     }
     var connections: MutableList<Connection> = mutableListOf()
+    var userData: UserData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,10 @@ class MainActivity : Activity(){
         val btnOpenPersonalCardActivity: Button = findViewById(R.id.personalCardBtn)
         val btnOpenBusinessCardActivity: Button = findViewById(R.id.businessCardBtn)
         val btnOpenScannerActivity: Button = findViewById(R.id.scannerBtn)
+
+        if (userData == null){
+            userData = UserData("","","","")
+        }
 
         btnOpenPersonalCardActivity.setOnClickListener {
             val openPersonalCard = Intent(this, PersonalCardActivity::class.java)
@@ -61,6 +70,12 @@ class MainActivity : Activity(){
             } else {
                 super.onActivityResult(requestCode, resultCode, data)
             }
+        }
+    }
+
+    fun insertConnection(connection: Connection) {
+        if (database != null){
+            NewConnectionTask(database!!, connection).execute()
         }
     }
 

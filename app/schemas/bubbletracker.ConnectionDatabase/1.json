@@ -2,16 +2,16 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "2678a28c3a48859ffa23df6a16eab4df",
+    "identityHash": "272961c7f62273738dd9032f4a88bf41",
     "entities": [
       {
         "tableName": "connections",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`email` TEXT NOT NULL, `direct_connections` INTEGER NOT NULL, `longitude` REAL NOT NULL, `latitude` REAL NOT NULL, PRIMARY KEY(`email`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `direct_connections` INTEGER NOT NULL, `longitude` TEXT NOT NULL, `latitude` TEXT NOT NULL, `email` TEXT NOT NULL)",
         "fields": [
           {
-            "fieldPath": "email",
-            "columnName": "email",
-            "affinity": "TEXT",
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -23,19 +23,69 @@
           {
             "fieldPath": "longitude",
             "columnName": "longitude",
-            "affinity": "REAL",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "latitude",
             "columnName": "latitude",
-            "affinity": "REAL",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "email"
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "user_data",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `personal_email` TEXT NOT NULL, `personal_name` TEXT NOT NULL, `business_email` TEXT NOT NULL, `business_name` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "personalEmail",
+            "columnName": "personal_email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "personalName",
+            "columnName": "personal_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "businessEmail",
+            "columnName": "business_email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "businessName",
+            "columnName": "business_name",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
           ],
           "autoGenerate": false
         },
@@ -46,7 +96,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '2678a28c3a48859ffa23df6a16eab4df')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '272961c7f62273738dd9032f4a88bf41')"
     ]
   }
 }

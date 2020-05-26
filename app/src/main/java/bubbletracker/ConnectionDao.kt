@@ -10,6 +10,12 @@ interface ConnectionDao {
     @Insert
     fun insert(connection: Connection): Long
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun upsert(userData: UserData)
+
+    @Query("select * from user_data where id = $CURRENT_USER_ID")
+    fun getUserData(): UserData
+
     @Update
     fun update(connection: Connection)
 
