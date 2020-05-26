@@ -1,6 +1,7 @@
 package bubbletracker
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,6 +10,18 @@ import com.example.bubbletracker.R
 import com.google.zxing.integration.android.IntentIntegrator
 
 class MainActivity : Activity(){
+
+    var database: ConnectionDatabase? = null
+        set(value) {
+            field = value
+            value?.let {
+                LoadConnectionsTask(it, this).execute()
+            }
+        }
+    init {
+        LoadDatabaseTask(this, this).execute()
+    }
+    var connections: MutableList<Connection> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,5 +62,9 @@ class MainActivity : Activity(){
                 super.onActivityResult(requestCode, resultCode, data)
             }
         }
+    }
+
+    fun getItemCount(): Int {
+        return connections.size
     }
 }
