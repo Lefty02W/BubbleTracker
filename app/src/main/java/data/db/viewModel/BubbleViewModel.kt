@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class BubbleViewModel (application: Application) : AndroidViewModel(application){
     private val bubbleRepository: BubbleRepository
     val allConnections: LiveData<List<Connection>>
-    val currentUser: LiveData<UserData>
+    val currentUser: LiveData<UserData?>
 
     init {
         val userDataDao = BubbleDatabase.getDatabase(application).userDataDao()

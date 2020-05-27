@@ -11,6 +11,6 @@ interface UserDataDao {
     fun upsert(userData: UserData)
 
     @Query("select * from user_data where id = $CURRENT_USER_ID")
-    fun getUserData(): LiveData<UserData>
+    fun getUserData(): LiveData<UserData?>
 
 }
