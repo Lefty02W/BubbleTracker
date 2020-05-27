@@ -5,13 +5,16 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.bubbletracker.R
@@ -22,12 +25,25 @@ import data.db.viewModel.BubbleViewModel
 class MainActivity : AppCompatActivity(){
 
     lateinit var bubbleViewModel: BubbleViewModel
+    private var notificationManager: NotificationManager? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bubbleViewModel = BubbleViewModel(application)
         setContentView(R.layout.activity_main)
-        createNotificationChannel()
+//        createNotificationChannel()
+        notificationManager =
+            getSystemService(
+                Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            createNotificationChannel(
+                "BubbleTracker",
+                "Connection Added",
+                 "successfully connected")
+        }
+
         runAnimation()
 
         val btnOpenPersonalCardActivity: Button = findViewById(R.id.personalCardBtn)
@@ -58,28 +74,40 @@ class MainActivity : AppCompatActivity(){
             }
 
         })
-
-
-
     }
 
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = getString(R.string.channel_name)
-            val channelId = getString(R.string.channel_id)
-            val descriptionText = getString(R.string.channel_description)
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(channelId, name, importance).apply {
-                description = descriptionText
-            }
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel(id: String, name: String,
+                                          description: String) {
+        val importance = NotificationManager.IMPORTANCE_LOW
+        val channel = NotificationChannel(id, name, importance)
+
+        channel.description = description
+        channel.enableLights(true)
+        channel.lightColor = Color.RED
+        channel.enableVibration(true)
+        channel.vibrationPattern =
+            longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
+        notificationManager?.createNotificationChannel(channel)
     }
+
+//    private fun createNotificationChannel() {
+//        // Create the NotificationChannel, but only on API 26+ because
+//        // the NotificationChannel class is new and not in the support library
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val name = getString(R.string.channel_name)
+//            val channelId = getString(R.string.channel_id)
+//            val descriptionText = getString(R.string.channel_description)
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val channel = NotificationChannel(channelId, name, importance).apply {
+//                description = descriptionText
+//            }
+//            // Register the channel with the system
+//            val notificationManager: NotificationManager =
+//                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+//            notificationManager.createNotificationChannel(channel)
+//        }
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
@@ -113,6 +141,10 @@ class MainActivity : AppCompatActivity(){
     private fun addConnection(contents: String) {
         val result: List<String> = contents.split(",")
         //todo send notification with "%result[0] added to connections
+        val name = result[0]
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            sendNotification(name)
+        }
         bubbleViewModel.getConnectionOnEmail(result[4]).observe(this, Observer {
                  if (it.isEmpty()){
                     bubbleViewModel.insertConnection(Connection(result[1].toInt(), result[2],result[3],result[4]))
@@ -120,6 +152,23 @@ class MainActivity : AppCompatActivity(){
                 bubbleViewModel.updateConnection(Connection(result[1].toInt(), result[2],result[3],result[4]))
             }
         })
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun sendNotification(name:String) {
+        val notificationID = 101
+        val channelID = "BubbleTracker"
+        val notification =
+            Notification.Builder(this,
+                channelID)
+                .setContentTitle("Connection Successful")
+                .setContentText("$name added to connections.")
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setChannelId(channelID)
+                .build()
+
+
+        notificationManager?.notify(notificationID, notification)
     }
 
     override fun onResume() {
