@@ -22,8 +22,7 @@ class MainActivity : Activity(){
     init {
         //todo put this back into the method and only pass context in
         //todo this is where the null pointer is
-        val context: Context = applicationContext
-        LoadDatabaseTask(this, context).execute()
+        LoadDatabaseTask(this).execute()
     }
     var connections: MutableList<Connection> = mutableListOf()
     var userData: UserData? = null

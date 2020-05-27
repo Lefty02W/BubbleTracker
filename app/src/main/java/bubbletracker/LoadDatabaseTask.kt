@@ -5,13 +5,13 @@ import android.os.AsyncTask
 import androidx.room.Room
 import java.lang.ref.WeakReference
 
-class LoadDatabaseTask(mainActivity: MainActivity, var context: Context) : AsyncTask<Unit, Unit, ConnectionDatabase?>() {
+class LoadDatabaseTask(mainActivity: MainActivity) : AsyncTask<Unit, Unit, ConnectionDatabase?>() {
     private val mainActivity : WeakReference<MainActivity> = WeakReference(mainActivity)
 
     override fun doInBackground(vararg params: Unit?): ConnectionDatabase? {
         var database: ConnectionDatabase? = null
         mainActivity.get()?.let{
-            database = Room.databaseBuilder(context, ConnectionDatabase::class.java, "random").build()
+            database = Room.databaseBuilder(it.applicationContext, ConnectionDatabase::class.java, "random").build()
         }
         return database
     }
