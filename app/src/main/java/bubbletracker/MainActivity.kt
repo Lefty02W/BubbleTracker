@@ -13,12 +13,13 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.bubbletracker.R
 import com.google.zxing.integration.android.IntentIntegrator
-import data.db.BubbleDatabase
 import data.db.viewModel.BubbleViewModel
 
-class MainActivity : Activity(){
+class MainActivity : AppCompatActivity(){
 
     lateinit var bubbleViewModel: BubbleViewModel
 
@@ -49,6 +50,17 @@ class MainActivity : Activity(){
             scanner.setBeepEnabled(false)
             scanner.initiateScan()
         }
+
+        bubbleViewModel.allConnections.observe(this, Observer {
+            val directConnectionNumber = it.size
+            findViewById<TextView>(R.id.directConnectionTotal).apply {
+                text = directConnectionNumber.toString()
+            }
+
+        })
+
+
+
     }
 
     private fun createNotificationChannel() {
@@ -118,16 +130,7 @@ class MainActivity : Activity(){
         personalCardBtn.startAnimation(btt3)
         businessCardBtn.startAnimation(btt2)
         scannerBtn.startAnimation(btt)
-//        val ttb2: Animation = AnimationUtils.loadAnimation(this, R.anim.ttb2)
-//        val stb: Animation = AnimationUtils.loadAnimation(this, R.anim.stb)
 
-//        val logo: ImageView = findViewById(R.id.logoImage)
-//        val rudimentBtn: TextView = findViewById(R.id.rudiment_btn)
-//        val metronomeBtn: TextView = findViewById(R.id.metronome_btn)
-//
-//        logo.startAnimation(stb)
-//        rudimentBtn.startAnimation(ttb)
-//        metronomeBtn.startAnimation(ttb2)
     }
 
 }

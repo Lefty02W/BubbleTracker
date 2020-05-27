@@ -20,4 +20,5 @@
     <string name="channel_name">bubbleNotificationChannel</string>
     <string name="channel_description">channel to send notification</string>
     <string name="channel_id">scan complete channel</string>
+    <string name="direct_connections">Direct Connections</string>
 </resources>
