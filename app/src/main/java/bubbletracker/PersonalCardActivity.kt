@@ -64,9 +64,11 @@ class PersonalCardActivity: AppCompatActivity() {
     }
 
     private fun generatePersonalQR() {
-        val sentData = "$name,$directConnectionTotal,$long,$lat,$email"
-        val bitmap = encodeAsBitmap(sentData)
-        personalQR.setImageBitmap(bitmap)
+        if (name != "" && email != ""){
+            val sentData = "$name,$directConnectionTotal,$long,$lat,$email"
+            val bitmap = encodeAsBitmap(sentData)
+            personalQR.setImageBitmap(bitmap)
+        }
     }
 
     private fun encodeAsBitmap(text: String): Bitmap?{
@@ -146,6 +148,12 @@ class PersonalCardActivity: AppCompatActivity() {
         } else {
             requestPermissions()
         }
+    }
+
+    override fun onResume() {
+        generatePersonalQR()
+        super.onResume()
+
     }
 
     /**
