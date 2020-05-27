@@ -24,4 +24,5 @@
     <string name="personal_email">Personal Email</string>
     <string name="personal_name">Personal Name</string>
     <string name="save">Save</string>
+    <string name="edit_user_data">Edit user data</string>
 </resources>

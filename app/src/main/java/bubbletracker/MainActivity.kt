@@ -8,6 +8,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -24,7 +26,7 @@ import data.db.viewModel.BubbleViewModel
 
 class MainActivity : AppCompatActivity(){
 
-    lateinit var bubbleViewModel: BubbleViewModel
+    private lateinit var bubbleViewModel: BubbleViewModel
     private var notificationManager: NotificationManager? = null
 
 
@@ -75,6 +77,20 @@ class MainActivity : AppCompatActivity(){
 
         })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu);
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId;
+        if (id == R.id.add_action){
+            Toast.makeText(this, "item Add Clicked", Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(id: String, name: String,
