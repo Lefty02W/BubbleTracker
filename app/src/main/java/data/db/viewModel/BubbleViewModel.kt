@@ -25,6 +25,10 @@ class BubbleViewModel (application: Application) : AndroidViewModel(application)
         currentUser = bubbleRepository.userData
     }
 
+    fun getConnectionOnEmail(email: String): LiveData<List<Connection?>>{
+        return bubbleRepository.getConnectionOnEmail(email)
+    }
+
     fun insertConnection(connection: Connection) = viewModelScope.launch(Dispatchers.IO){
         connection.id = bubbleRepository.insertConnection(connection)
     }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "272961c7f62273738dd9032f4a88bf41",
+    "identityHash": "8aca3da991b2f819a1b0d4f424865fc9",
     "entities": [
       {
         "tableName": "user_data",
@@ -89,14 +89,23 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_connections_email",
+            "unique": true,
+            "columnNames": [
+              "email"
+            ],
+            "createSql": "CREATE UNIQUE INDEX IF NOT EXISTS `index_connections_email` ON `${TABLE_NAME}` (`email`)"
+          }
+        ],
         "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '272961c7f62273738dd9032f4a88bf41')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8aca3da991b2f819a1b0d4f424865fc9')"
     ]
   }
 }

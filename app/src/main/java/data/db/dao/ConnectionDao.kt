@@ -10,6 +10,10 @@ interface ConnectionDao {
     @Query("Select * FROM connections")
     fun getAll(): LiveData<List<Connection>>
 
+
+    @Query("Select * from connections where email = :email")
+    fun getConnectionWithGivenEmail(email:String): LiveData<List<Connection?>>
+
     @Insert
     fun insert(connection: Connection): Long
 

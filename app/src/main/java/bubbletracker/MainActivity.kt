@@ -1,6 +1,5 @@
 package bubbletracker
 
-import android.app.Activity
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -17,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.bubbletracker.R
 import com.google.zxing.integration.android.IntentIntegrator
+import data.db.entity.Connection
 import data.db.viewModel.BubbleViewModel
 
 class MainActivity : AppCompatActivity(){
@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity(){
                         val manager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                         manager.notify(0, notification)
                     }
+                    addConnection(result.contents)
                     Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
 
                 }
@@ -107,6 +108,18 @@ class MainActivity : AppCompatActivity(){
                 super.onActivityResult(requestCode, resultCode, data)
             }
         }
+    }
+
+    private fun addConnection(contents: String) {
+        val result: List<String> = contents.split(",")
+        //todo send notification with "%result[0] added to connections
+        bubbleViewModel.getConnectionOnEmail(result[4]).observe(this, Observer {
+                 if (it.isEmpty()){
+                    bubbleViewModel.insertConnection(Connection(result[1].toInt(), result[2],result[3],result[4]))
+                } else {
+                bubbleViewModel.updateConnection(Connection(result[1].toInt(), result[2],result[3],result[4]))
+            }
+        })
     }
 
     override fun onResume() {

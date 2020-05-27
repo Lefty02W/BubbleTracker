@@ -1,5 +1,6 @@
 package bubbletracker
 
+import androidx.lifecycle.LiveData
 import data.db.dao.ConnectionDao
 import data.db.dao.UserDataDao
 import data.db.entity.Connection
@@ -10,7 +11,11 @@ class BubbleRepository(private val userDataDao: UserDataDao, private val connect
     val userData = userDataDao.getUserData()
     val allConnections = connectionDao.getAll()
 
-    suspend fun insertConnection(connection: Connection): Long{
+    fun getConnectionOnEmail(email: String): LiveData<List<Connection?>>{
+        return connectionDao.getConnectionWithGivenEmail(email)
+    }
+
+    fun insertConnection(connection: Connection): Long{
         return connectionDao.insert(connection)
     }
 
