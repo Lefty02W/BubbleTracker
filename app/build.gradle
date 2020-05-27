@@ -13,8 +13,13 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+
     }
 
     buildTypes {
@@ -41,11 +46,22 @@ dependencies {
 
     //Database
     def room_version = "2.2.5"
+    def life_cycle_version = "2.2.0"
+    def coroutines = '1.3.4'
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-extensions:$life_cycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$life_cycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$life_cycle_version"
+
+    // Kotlin components
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+
     //Notification
-    implementation "com.android.support:support-compat:28.0.0"
 
 
 }

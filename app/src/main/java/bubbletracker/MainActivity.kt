@@ -15,11 +15,16 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.bubbletracker.R
 import com.google.zxing.integration.android.IntentIntegrator
+import data.db.BubbleDatabase
+import data.db.viewModel.BubbleViewModel
 
 class MainActivity : Activity(){
 
+    lateinit var bubbleViewModel: BubbleViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        bubbleViewModel = BubbleViewModel(application)
         setContentView(R.layout.activity_main)
         createNotificationChannel()
         runAnimation()
