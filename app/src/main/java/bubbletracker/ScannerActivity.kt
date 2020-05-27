@@ -7,23 +7,18 @@ import android.widget.Toast
 import com.example.bubbletracker.R
 import com.google.zxing.integration.android.IntentIntegrator
 
-//import me.dm7.barcodescanner.zbar.Result
-//import me.dm7.barcodescanner.zbar.ZBarScannerView
 
 class ScannerActivity: Activity(){
 
-//    private lateinit var mScannerView: ZBarScannerView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        mScannerView = ZBarScannerView(this)
         setContentView(R.layout.activity_scanner)
         val scanner = IntentIntegrator(this)
         scanner.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
         scanner.setBeepEnabled(false)
         scanner.initiateScan()
-//        setContentView(mScannerView)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

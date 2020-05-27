@@ -1,7 +1,6 @@
 package bubbletracker
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,30 +11,46 @@ import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
 import com.example.bubbletracker.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
+import data.db.viewModel.BubbleViewModel
 import kotlinx.android.synthetic.main.activity_personal_card.*
 import java.lang.IllegalArgumentException
 
-class PersonalCardActivity: Activity() {
+class PersonalCardActivity: AppCompatActivity() {
 
     private val PERMISSION_ID = 42
     lateinit var mFusedLocationClient: FusedLocationProviderClient
     var lat = ""
     var long = ""
-    val text = "This is my personal code"
+    var name = ""
+    var email = ""
+    var directConnectionTotal = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_card)
+
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastLocation()
+
+        val bubbleViewModel = BubbleViewModel(application)
+        bubbleViewModel.currentUser.observe(this, Observer {
+            name = it?.personalName.orEmpty()
+            email = it?.personalEmail.orEmpty()
+        })
+
+        bubbleViewModel.allConnections.observe(this, Observer {
+            directConnectionTotal = it.size.toString()
+        })
 
         val btnOpenEditPersonalCardInfoActivity: Button = findViewById(R.id.pCardEditBtn)
         btnOpenEditPersonalCardInfoActivity.setOnClickListener {
@@ -49,9 +64,7 @@ class PersonalCardActivity: Activity() {
     }
 
     private fun generatePersonalQR() {
-        println(lat)
-        println(long)
-        val sentData = "$text,$lat,$long"
+        val sentData = "$name,$directConnectionTotal,$long,$lat,$email"
         val bitmap = encodeAsBitmap(sentData)
         personalQR.setImageBitmap(bitmap)
     }

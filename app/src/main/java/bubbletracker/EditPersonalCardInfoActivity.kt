@@ -23,7 +23,6 @@ class EditPersonalCardInfoActivity: AppCompatActivity() {
         bubbleViewModel = BubbleViewModel(application)
 
 
-//        try {
         bubbleViewModel.currentUser.observe(this, Observer {
             findViewById<EditText>(R.id.personalNameInput).apply {
                 setText(it?.personalName.orEmpty())
@@ -34,16 +33,7 @@ class EditPersonalCardInfoActivity: AppCompatActivity() {
             businessName = it?.businessName.orEmpty()
             businessEmail = it?.businessEmail.orEmpty()
             })
-//        } catch (exception: NullPointerException){
-//            findViewById<EditText>(R.id.personalNameInput).apply {
-//                setText("")
-//            }
-//            findViewById<EditText>(R.id.emailInput).apply {
-//                setText("")
-//            }
-//            businessName = ""
-//            businessEmail = ""
-//        }
+
 
         val btnSaveUserData: Button = findViewById(R.id.saveUserDataBtn)
 
