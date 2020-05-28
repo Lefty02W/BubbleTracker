@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/editPersonalInfo"
     android:background="#111422"
     android:layout_width="match_parent"
@@ -25,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/personalNameInput"
+        android:id="@+id/businessNameInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -41,7 +40,7 @@
         android:text="@string/last_name_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personalNameLbl" />
+        app:layout_constraintTop_toBottomOf="@+id/businessNameLbl" />
 
     <EditText
         android:id="@+id/emailInput"
@@ -60,7 +59,7 @@
         android:text="@string/emailText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personalEmailLbl" />
+        app:layout_constraintTop_toBottomOf="@+id/businessEmailLbl" />
 
     <Button
         android:id="@+id/saveUserDataBtn"
@@ -79,7 +78,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/personalNameLbl"
+        android:id="@+id/businessNameLbl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -94,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rudimentHeading" />
 
     <TextView
-        android:id="@+id/personalEmailLbl"
+        android:id="@+id/businessEmailLbl"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -106,6 +105,6 @@
         android:text="@string/personal_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/personalNameInput" />
+        app:layout_constraintTop_toBottomOf="@+id/businessNameInput" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

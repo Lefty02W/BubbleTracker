@@ -25,4 +25,6 @@
     <string name="personal_name">Personal Name</string>
     <string name="save">Save</string>
     <string name="edit_user_data">Edit user data</string>
+    <string name="business_name">Business Name</string>
+    <string name="business_email">Business Email</string>
 </resources>

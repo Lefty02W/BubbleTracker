@@ -67,7 +67,7 @@ class PersonalCardActivity: AppCompatActivity() {
         if (name != "" && email != ""){
             val sentData = "$name,$directConnectionTotal,$long,$lat,$email"
             val bitmap = encodeAsBitmap(sentData)
-            personalQR.setImageBitmap(bitmap)
+            businessQR.setImageBitmap(bitmap)
         }
     }
 

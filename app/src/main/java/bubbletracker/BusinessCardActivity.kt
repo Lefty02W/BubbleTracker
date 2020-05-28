@@ -1,7 +1,6 @@
 package bubbletracker
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -35,7 +34,7 @@ class BusinessCardActivity: Activity(){
 
     private fun generateBusinessQR() {
         val bitmap = encodeAsBitmap(text)
-        personalQR.setImageBitmap(bitmap)
+        businessQR.setImageBitmap(bitmap)
     }
 
     private fun encodeAsBitmap(text: String): Bitmap?{
