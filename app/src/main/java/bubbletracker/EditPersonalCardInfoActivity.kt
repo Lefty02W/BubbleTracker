@@ -14,6 +14,7 @@ class EditPersonalCardInfoActivity: AppCompatActivity() {
     lateinit var bubbleViewModel: BubbleViewModel
     lateinit var businessName: String
     lateinit var businessEmail: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
             setTheme(R.style.DarkTheme)

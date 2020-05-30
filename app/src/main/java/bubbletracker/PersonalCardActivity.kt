@@ -35,8 +35,6 @@ class PersonalCardActivity: AppCompatActivity() {
     var name = ""
     var email = ""
     var directConnectionTotal = ""
-    lateinit var generateButton: Button
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
@@ -48,6 +46,12 @@ class PersonalCardActivity: AppCompatActivity() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastLocation()
 
+        initDataBase()
+        setButtons()
+        checkData()
+    }
+
+    private fun initDataBase(){
         val bubbleViewModel = BubbleViewModel(application)
         bubbleViewModel.currentUser.observe(this, Observer {
             name = it?.personalName.orEmpty()
@@ -57,17 +61,18 @@ class PersonalCardActivity: AppCompatActivity() {
         bubbleViewModel.allConnections.observe(this, Observer {
             directConnectionTotal = it.size.toString()
         })
+    }
 
+    private fun setButtons(){
         val btnOpenEditPersonalCardInfoActivity: Button = findViewById(R.id.pCardEditBtn)
         btnOpenEditPersonalCardInfoActivity.setOnClickListener {
             val openEditPersonalCardInfoActivity = Intent(this, EditPersonalCardInfoActivity::class.java)
             startActivity(openEditPersonalCardInfoActivity)
         }
-        generateButton = findViewById(R.id.pCardGenerateBtn)
+        val generateButton: Button = findViewById(R.id.pCardGenerateBtn)
         generateButton.setOnClickListener {
             generatePersonalQR()
         }
-        checkData()
     }
 
     private fun checkData() {
@@ -172,37 +177,5 @@ class PersonalCardActivity: AppCompatActivity() {
         checkData()
         super.onStart()
     }
-
-    /**
-     * Method to aviod rare cases of location == null this method records the location information
-     * during run time.
-     */
-//    private fun requestNewLocationData() {
-//        var mLocationRequest = LocationRequest()
-//        mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-//        mLocationRequest.interval = 0
-//        mLocationRequest.fastestInterval = 0
-//        mLocationRequest.numUpdates = 1
-//
-//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-//        mFusedLocationClient!!.requestLocationUpdates(
-//            mLocationRequest, mLocationCallback,
-//            Looper.myLooper()
-//        )
-//    }
-
-//    private fun promptForGPS() {
-//        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-//        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-//            AlertDialog.Builder(this).apply {
-//                setMessage("GPS is not enabled on your device. Enable it in the location settings.")
-//                setPositiveButton("Settings") { _, _ ->
-//                    startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-//                }
-//                setNegativeButton("Cancel") { _, _ -> }
-//                show()
-//            }
-//        }
-//    }
 
 }
