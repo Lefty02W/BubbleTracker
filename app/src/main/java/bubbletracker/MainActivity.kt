@@ -52,7 +52,27 @@ class MainActivity : AppCompatActivity(){
         }
 
         runAnimation()
+        initButtons()
 
+        bubbleViewModel.allConnections.observe(this, Observer {
+            val directConnectionNumber = it.size
+            findViewById<TextView>(R.id.directConnectionTotal).apply {
+                text = directConnectionNumber.toString()
+            }
+
+        })
+    }
+
+    private fun calculateIndirectConnections(){
+        bubbleViewModel.allConnections.observe(this, Observer {
+            var indirectConnection = 0
+            for (connection in it.listIterator()){
+                indirectConnection += connection.directConnections
+            }
+        })
+    }
+
+    private fun initButtons(){
         val btnOpenPersonalCardActivity: Button = findViewById(R.id.personalCardBtn)
         val btnOpenBusinessCardActivity: Button = findViewById(R.id.businessCardBtn)
         val btnOpenScannerActivity: Button = findViewById(R.id.scannerBtn)
@@ -73,14 +93,6 @@ class MainActivity : AppCompatActivity(){
             scanner.setBeepEnabled(false)
             scanner.initiateScan()
         }
-
-        bubbleViewModel.allConnections.observe(this, Observer {
-            val directConnectionNumber = it.size
-            findViewById<TextView>(R.id.directConnectionTotal).apply {
-                text = directConnectionNumber.toString()
-            }
-
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -93,7 +105,6 @@ class MainActivity : AppCompatActivity(){
         if (id == R.id.add_action){
             val openPreferences = Intent(this, SettingsActivity::class.java)
             startActivity(openPreferences)
-//            Toast.makeText(this, "item Add Clicked", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -113,24 +124,6 @@ class MainActivity : AppCompatActivity(){
             longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400)
         notificationManager?.createNotificationChannel(channel)
     }
-
-//    private fun createNotificationChannel() {
-//        // Create the NotificationChannel, but only on API 26+ because
-//        // the NotificationChannel class is new and not in the support library
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val name = getString(R.string.channel_name)
-//            val channelId = getString(R.string.channel_id)
-//            val descriptionText = getString(R.string.channel_description)
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val channel = NotificationChannel(channelId, name, importance).apply {
-//                description = descriptionText
-//            }
-//            // Register the channel with the system
-//            val notificationManager: NotificationManager =
-//                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-//            notificationManager.createNotificationChannel(channel)
-//        }
-//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {

@@ -11,6 +11,7 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -35,6 +36,8 @@ class PersonalCardActivity: AppCompatActivity() {
     var name = ""
     var email = ""
     var directConnectionTotal = ""
+    private lateinit var bubbleViewModel: BubbleViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
@@ -45,14 +48,19 @@ class PersonalCardActivity: AppCompatActivity() {
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         getLastLocation()
-
         initDataBase()
+
+        bubbleViewModel.allConnections.observe(this, Observer {
+            directConnectionTotal = it.size.toString()
+        })
+
         setButtons()
         checkData()
+
     }
 
     private fun initDataBase(){
-        val bubbleViewModel = BubbleViewModel(application)
+        bubbleViewModel = BubbleViewModel(application)
         bubbleViewModel.currentUser.observe(this, Observer {
             name = it?.personalName.orEmpty()
             email = it?.personalEmail.orEmpty()
@@ -88,6 +96,7 @@ class PersonalCardActivity: AppCompatActivity() {
             businessQR.setImageBitmap(bitmap)
         }
     }
+
 
     private fun encodeAsBitmap(text: String): Bitmap?{
         val result: BitMatrix

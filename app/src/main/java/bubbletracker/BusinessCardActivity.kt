@@ -35,6 +35,8 @@ class BusinessCardActivity: AppCompatActivity(){
     var name = ""
     var email = ""
     var directConnectionTotal = ""
+    private lateinit var bubbleViewModel: BubbleViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
@@ -47,6 +49,10 @@ class BusinessCardActivity: AppCompatActivity(){
         getLastLocation()
 
         initDataBase()
+
+        bubbleViewModel.allConnections.observe(this, Observer {
+            directConnectionTotal = it.size.toString()
+        })
         setButtons()
         checkData()
     }
