@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import com.example.bubbletracker.R
 import data.db.entity.UserData
@@ -14,6 +15,9 @@ class EditPersonalCardInfoActivity: AppCompatActivity() {
     lateinit var businessName: String
     lateinit var businessEmail: String
     override fun onCreate(savedInstanceState: Bundle?) {
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkTheme)
+        } else setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_personal_info)
 

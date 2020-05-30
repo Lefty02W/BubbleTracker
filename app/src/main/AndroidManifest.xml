@@ -3,7 +3,7 @@
     package="com.example.bubbletracker">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:icon="@mipmap/ic_launcher_bubbletracker"
@@ -11,16 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_bubbletracker_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name="bubbletracker.SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
         <activity android:name="bubbletracker.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="bubbletracker.PersonalCardActivity"/>
-        <activity android:name="bubbletracker.BusinessCardActivity"/>
-        <activity android:name="bubbletracker.ScannerActivity"/>
-        <activity android:name="bubbletracker.EditPersonalCardInfoActivity"/>
-        <activity android:name="bubbletracker.EditBusinessCardInfoActivity"/>
+        <activity android:name="bubbletracker.PersonalCardActivity" />
+        <activity android:name="bubbletracker.BusinessCardActivity" />
+        <activity android:name="bubbletracker.ScannerActivity" />
+        <activity android:name="bubbletracker.EditPersonalCardInfoActivity" />
+        <activity android:name="bubbletracker.EditBusinessCardInfoActivity" />
     </application>
+
 </manifest>

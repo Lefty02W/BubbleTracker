@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.bubbletracker.R
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
@@ -17,6 +18,9 @@ class BusinessCardActivity: Activity(){
     val text = "this is my business text"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkTheme)
+        } else setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_business_card)
 

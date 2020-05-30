@@ -18,7 +18,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
+import androidx.preference.PreferenceManager
 import com.example.bubbletracker.R
 import com.google.zxing.integration.android.IntentIntegrator
 import data.db.entity.Connection
@@ -31,6 +33,9 @@ class MainActivity : AppCompatActivity(){
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkTheme)
+        } else setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         bubbleViewModel = BubbleViewModel(application)
         setContentView(R.layout.activity_main)
@@ -79,14 +84,16 @@ class MainActivity : AppCompatActivity(){
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu,menu);
+        menuInflater.inflate(R.menu.main_menu,menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId;
+        val id = item.itemId
         if (id == R.id.add_action){
-            Toast.makeText(this, "item Add Clicked", Toast.LENGTH_SHORT).show()
+            val openPreferences = Intent(this, SettingsActivity::class.java)
+            startActivity(openPreferences)
+//            Toast.makeText(this, "item Add Clicked", Toast.LENGTH_SHORT).show()
         }
         return super.onOptionsItemSelected(item)
     }

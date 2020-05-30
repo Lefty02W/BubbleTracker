@@ -6,6 +6,22 @@
         <item name="colorPrimary">#1b1e2f</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorBackground">#f6f6f6</item>
+        <item name="colorButton">#ffcc01</item>
+        <item name="colorHeader">#ffcc01</item>
+        <item name="colorText">#1b1e2f</item>
+        <item name="colorLightText">#1b1e2f</item>
+    </style>
+
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#1b1e2f</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorBackground">#111422</item>
+        <item name="colorButton">#ffcc01</item>
+        <item name="colorHeader">#ffcc01</item>
+        <item name="colorText">#1b1e2f</item>
+        <item name="colorLightText">#f6f6f6</item>
     </style>
 
 </resources>
