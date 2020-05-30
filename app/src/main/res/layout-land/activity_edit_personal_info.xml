@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/editPersonalInfo"
+    android:background="?attr/colorBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/rudimentHeading"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:text="@string/editPersonal"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="?attr/colorText"
+        android:background="?attr/colorHeader"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/businessNameInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="#ffcc01"
+        android:ems="10"
+        android:hint="@string/personal_name"
+        android:inputType="textPersonName"
+        android:text="@string/personal_name"
+        android:textColor="?attr/colorLightText"
+        app:layout_constraintEnd_toStartOf="@+id/saveUserDataBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/businessNameLbl" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:backgroundTint="#ffcc01"
+        android:ems="10"
+        android:hint="@string/emailText"
+        android:inputType="textEmailAddress"
+        android:text="@string/emailText"
+        android:textColor="?attr/colorLightText"
+        app:layout_constraintEnd_toStartOf="@+id/saveUserDataBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/businessEmailLbl" />
+
+    <Button
+        android:id="@+id/saveUserDataBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/colorButton"
+        android:text="@string/save"
+        android:textColor="?attr/colorText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/businessNameLbl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/personal_name"
+        android:textColor="?attr/colorLightText"
+        app:layout_constraintEnd_toStartOf="@+id/saveUserDataBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rudimentHeading" />
+
+    <TextView
+        android:id="@+id/businessEmailLbl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/personal_email"
+        android:textColor="?attr/colorLightText"
+        app:layout_constraintEnd_toStartOf="@+id/saveUserDataBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/businessNameInput" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
