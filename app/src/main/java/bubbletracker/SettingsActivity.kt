@@ -38,17 +38,12 @@ class SettingsActivity : AppCompatActivity() {
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey)
-
             val switchDarkMode: SwitchPreference? = findPreference("darkTheme")
-            println("****************************************************************")
-            if (switchDarkMode != null) {
-                println(switchDarkMode.isChecked)
+            if(AppCompatDelegate.getDefaultNightMode() != MODE_NIGHT_YES){
+                switchDarkMode?.isChecked = false
             }
 
-            println("****************************************************************")
-
-
-            switchDarkMode?.setOnPreferenceChangeListener{ preference, newValue ->
+            switchDarkMode?.setOnPreferenceChangeListener{ _, newValue ->
                 if (newValue == true){
                     AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
                 } else {

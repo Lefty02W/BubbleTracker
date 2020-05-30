@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BubbleTracker</string>
+    <string name="appTitle">बबल ट्रैकर</string>
+    <string name="scanner">चित्रान्वीक्षक</string>
+    <string name="pCard">व्यक्तिगत कार्ड</string>
+    <string name="bCard">बिज़नेस कार्ड</string>
+    <string name="manualEntry">हस्त प्रविष्टि</string>
+    <string name="editPersonal">व्यक्तिगत जानकारी संपादित करें</string>
+    <string name="editBusiness">व्यक्तिगत जानकारी संपादित करें</string>
+    <string name="edit_info">जानकारी संपादित करें</string>
+    <string name="generate">उत्पन्न</string>
+    <string name="emailText">ईमेल</string>
+    <string name="scanner_label">चित्रान्वीक्षक</string>
+    <string name="business_card_label">बिज़नेस कार्ड</string>
+    <string name="personal_card_label">व्यक्तिगत कार्ड</string>
+    <string name="qr_description">QR कोड धारण करने के लिए छवि दृश्य</string>
+    <string name="channel_name">bubbleNotificationChannel</string>
+    <string name="channel_description">अधिसूचना भेजने के लिए चैनल</string>
+    <string name="channel_id">स्कैन पूरा चैनल</string>
+    <string name="direct_connections">सीधा संबंध</string>
+    <string name="personal_email">व्यक्तिगत ईमेल</string>
+    <string name="personal_name">व्यक्तिगत नाम</string>
+    <string name="save">सहेजें</string>
+    <string name="edit_user_data">उपयोगकर्ता डेटा संपादित करें</string>
+    <string name="business_name">व्यवास्यक नाम</string>
+    <string name="business_email">बिजनेस ईमेल</string>
+    <string name="title_activity_settings">समायोजन</string>
+
+        <!-- Sync Preferences -->
+
+    <string name="personal_data">व्यक्तिगत डेटा</string>
+    <string name="business_data">व्यापार डेटा</string>
+    <string name="themes">विषय-वस्तु</string>
+    <string name="dark_theme">डार्क थीम</string>
+    <string name="general">सामान्य</string>
+</resources>

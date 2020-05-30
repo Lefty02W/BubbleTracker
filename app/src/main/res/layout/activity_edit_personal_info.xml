@@ -37,7 +37,7 @@
         android:ems="10"
         android:hint="@string/personal_name"
         android:inputType="textPersonName"
-        android:text="@string/last_name_text"
+        android:text="@string/personal_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/businessNameLbl" />
