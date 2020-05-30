@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -34,6 +35,7 @@ class PersonalCardActivity: AppCompatActivity() {
     var name = ""
     var email = ""
     var directConnectionTotal = ""
+    lateinit var generateButton: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +63,15 @@ class PersonalCardActivity: AppCompatActivity() {
             val openEditPersonalCardInfoActivity = Intent(this, EditPersonalCardInfoActivity::class.java)
             startActivity(openEditPersonalCardInfoActivity)
         }
-        val btnGeneratePersonalQR: Button = findViewById(R.id.pCardGenerateBtn)
-        btnGeneratePersonalQR.setOnClickListener {
+        generateButton = findViewById(R.id.pCardGenerateBtn)
+        generateButton.setOnClickListener {
+            generatePersonalQR()
+        }
+        checkData()
+    }
+
+    private fun checkData() {
+        if (name.isNotEmpty() && email.isNotEmpty()){
             generatePersonalQR()
         }
     }
@@ -155,9 +164,13 @@ class PersonalCardActivity: AppCompatActivity() {
     }
 
     override fun onResume() {
-        generatePersonalQR()
+        checkData()
         super.onResume()
+    }
 
+    override fun onStart() {
+        checkData()
+        super.onStart()
     }
 
     /**

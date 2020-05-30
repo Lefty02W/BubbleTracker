@@ -47,6 +47,7 @@ class EditPersonalCardInfoActivity: AppCompatActivity() {
                     businessEmail, businessName
                 )
             )
+            onBackPressed()
         }
     }
 }
