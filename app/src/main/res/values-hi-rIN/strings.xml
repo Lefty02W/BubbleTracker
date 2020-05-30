@@ -34,4 +34,5 @@
     <string name="themes">विषय-वस्तु</string>
     <string name="dark_theme">डार्क थीम</string>
     <string name="general">सामान्य</string>
+    <string name="indirect_connections">अप्रत्यक्ष कनेक्शन</string>
 </resources>

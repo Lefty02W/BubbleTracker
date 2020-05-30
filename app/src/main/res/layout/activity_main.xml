@@ -92,6 +92,19 @@
         app:layout_constraintTop_toBottomOf="@+id/mainHeading" />
 
     <TextView
+        android:id="@+id/indirectConnectionLbl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/indirect_connections"
+        android:textColor="?attr/colorLightText"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainHeading" />
+
+    <TextView
         android:id="@+id/directConnectionTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -104,6 +117,20 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/directConnectionLbl" />
+
+    <TextView
+        android:id="@+id/indirectConnectionTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text=""
+        android:textColor="?attr/colorLightText"
+        android:textSize="100sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indirectConnectionLbl2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -59,15 +59,12 @@ class MainActivity : AppCompatActivity(){
             findViewById<TextView>(R.id.directConnectionTotal).apply {
                 text = directConnectionNumber.toString()
             }
-
-        })
-    }
-
-    private fun calculateIndirectConnections(){
-        bubbleViewModel.allConnections.observe(this, Observer {
             var indirectConnection = 0
             for (connection in it.listIterator()){
                 indirectConnection += connection.directConnections
+            }
+            findViewById<TextView>(R.id.indirectConnectionTotal).apply {
+                text = indirectConnection.toString()
             }
         })
     }

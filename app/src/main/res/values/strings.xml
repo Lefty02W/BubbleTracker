@@ -33,4 +33,5 @@
     <string name="themes">Themes</string>
     <string name="dark_theme">Dark Theme</string>
     <string name="general">General</string>
+    <string name="indirect_connections">Indirect Connections</string>
 </resources>
