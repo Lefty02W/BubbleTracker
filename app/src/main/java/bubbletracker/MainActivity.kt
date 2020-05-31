@@ -8,6 +8,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -31,11 +33,14 @@ class MainActivity : AppCompatActivity(){
     private lateinit var bubbleViewModel: BubbleViewModel
     private var notificationManager: NotificationManager? = null
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private fun checkTheme(){
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
             setTheme(R.style.DarkTheme)
         } else setTheme(R.style.AppTheme)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        checkTheme()
         super.onCreate(savedInstanceState)
         bubbleViewModel = BubbleViewModel(application)
         setContentView(R.layout.activity_main)
@@ -106,7 +111,6 @@ class MainActivity : AppCompatActivity(){
         return super.onOptionsItemSelected(item)
     }
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(id: String, name: String,
                                           description: String) {
@@ -124,6 +128,7 @@ class MainActivity : AppCompatActivity(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
+            vibrate()
             val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
             if (result != null) {
                 if (result.contents == null) {
@@ -149,6 +154,19 @@ class MainActivity : AppCompatActivity(){
                 super.onActivityResult(requestCode, resultCode, data)
             }
         }
+    }
+
+    private fun vibrate(){
+        val vibrator: Vibrator = this.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    200,
+                    VibrationEffect.DEFAULT_AMPLITUDE
+                )
+            )
+        }
+
     }
 
     private fun addConnection(contents: String) {
@@ -180,16 +198,17 @@ class MainActivity : AppCompatActivity(){
                 .setChannelId(channelID)
                 .build()
 
-
         notificationManager?.notify(notificationID, notification)
     }
 
     override fun onResume() {
+        checkTheme()
         runAnimation()
         super.onResume()
     }
 
     override fun onStart() {
+        checkTheme()
         runAnimation()
         super.onStart()
     }

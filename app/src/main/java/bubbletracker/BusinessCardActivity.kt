@@ -58,7 +58,7 @@ class BusinessCardActivity: AppCompatActivity(){
     }
 
     private fun initDataBase(){
-        val bubbleViewModel = BubbleViewModel(application)
+        bubbleViewModel = BubbleViewModel(application)
         bubbleViewModel.currentUser.observe(this, Observer {
             name = it?.businessName.orEmpty()
             email = it?.businessEmail.orEmpty()

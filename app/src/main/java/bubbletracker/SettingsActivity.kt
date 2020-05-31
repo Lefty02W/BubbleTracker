@@ -31,7 +31,8 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
-        return true
+        return super.onSupportNavigateUp()
+//        return true
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {
